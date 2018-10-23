@@ -1,5 +1,9 @@
+![](https://ws1.sinaimg.cn/mw690/0061W3qMgy1fwigy084scj30jg05sq5y.jpg)
+
 # SublimeSpec
 Sublime Text 3 设置备份
+
+![](https://ws1.sinaimg.cn/mw690/0061W3qMgy1fwigzqlestj31cb0wkagx.jpg)
 
 ## 安装插件
 - Package Control
