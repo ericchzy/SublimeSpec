@@ -1,0 +1,91 @@
+; Autohotkey Capslock Remapping Script 
+; - Deactivates capslock for normal (accidental) use.
+; - Hold Capslock and drag anywhere in a window to move it (not just the title bar).
+; - Access the following functions when pressing Capslock: 
+    ;Cursor keys        - J, K, L, I
+    ;Home,End       - N, ;
+    ;Esc            - CapsLock only
+    ;CapsLock       - Space
+
+#Persistent
+SetCapsLockState, AlwaysOff
+
+; Capslock + [Shift] + hjkl (left, down, up, right, enter)
+
+Capslock & Enter::Send, ^{Enter DownTemp}
+Capslock & Enter up::Send, ^{Enter Up}
+
+; - 快速输入结对符号
+; - 设计使用场景是一些无括号自动补全的地方，如Jupyter Notebook
+; - 而对于拥有自动补全的IDE则不影响其使用
+; - 或许和编辑器的补全重叠，但是经过本人的使用并没有发现不适的地方
+; - 'Shift & [' 和 下面有冲突, 实现难度太大
+Shift & [::Send {Blind}{{}{}}{Shift up}{Left Downtemp}
+[::Send, [
+[ & '::Send {Blind}{[}{'}{'}{]}{Left Downtemp}{Left Downtemp}
+[ & ]::
+If GetKeyState("Shift", "P")
+    Send {Blind}
+Else
+    Send {Blind}{[}{]}{Left Downtemp}
+
+
+; ::/b::['']
+; [ & ' up::Send {Blind}{[}{'}{'}{]}{Left up}{Left up}
+;CapsLock & [ & ' up::Send, {[}{'}{'}{]}{Left up}
+
+; - 使用 Capslock+h/j/k/l 分别实现方向键上/下/左/右功能
+; - 使用 Capslock+;/n 分别实现End/Home功能
+
+Capslock & h::
+If GetKeyState("Shift", "P") & !GetKeyState("]", "P") 
+	Send, ^+{Left DownTemp}
+Else If GetKeyState("[", "P")
+    Send {Blind}
+Else
+    Send {Blind}{Left DownTemp}
+Capslock & h up:: Send {Blind}{Left Up}
+
+Capslock & j::Send {Blind}{Down DownTemp}
+Capslock & j up::Send {Blind}{Down Up}
+
+Capslock & k::Send {Blind}{Up DownTemp}
+Capslock & k up::Send {Blind}{Up Up}
+
+Capslock & l::
+If GetKeyState("Shift", "P")
+	Send, ^+{Right DownTemp}
+Else
+	Send {Blind}{Right DownTemp}
+Capslock & l up::Send {Blind}{Right Up}
+
+; Capslock + n (home, end)
+
+Capslock & n::SendInput {Blind}{Home Down}
+Capslock & n up::SendInput {Blind}{Home Up}
+
+Capslock & `;::SendInput {Blind}{End Down}
+Capslock & `; up::SendInput {Blind}{End Up}
+
+Capslock & Space::
+If GetKeyState("CapsLock", "T") = 1
+    SetCapsLockState, AlwaysOff
+Else 
+    SetCapsLockState, AlwaysOn
+Return
+
+; Capslock only, Send Escape
+CapsLock::Send, {ESC}
+
+; Capslck + s, open the gitbash
+CapsLock & s::Send +{F10},Send s
+
+; Capslck + w,  open Worktile
+; CapsLock & w::
+; Run https://worktile.com
+
+#IfWinActive ahk_class ConsoleWindowClass
+^V::
+SendInput {Raw}%clipboard%
+
+return
