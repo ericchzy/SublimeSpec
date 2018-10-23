@@ -1,0 +1,1 @@
+{"platforms": ["windows", "linux"], "description": "No description provided", "dependencies": [], "url": "https://github.com/robinchenyu/imagepaste", "sublime_text": ">=3000", "version": "1.0.61"}
