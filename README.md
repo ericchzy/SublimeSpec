@@ -29,7 +29,7 @@ Sublime Text 3 设置备份
 
 ## 字体
 
-- ![Source Code Pro](https://fonts.google.com/specimen/Source+Code+Pro)字体
+- [Source Code Pro](https://fonts.google.com/specimen/Source+Code+Pro)字体
 - Source Code Pro Semibold 和 微软雅黑 混合字体
 - Consolas 和 微软雅黑 混合字体
 
