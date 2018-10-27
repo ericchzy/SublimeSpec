@@ -4,11 +4,14 @@
 Sublime Text 3 设置备份
 
 ## 安装插件
+- Boxy Theme
 - Package Control
 - Markdown Preview - Markdown文件预览。快捷键`alt + m`。
 - MarkdownEditing - Markdown编辑器。
 - SublimeREPL - 交互环境
 - SideBarEnhancement
+- Terminal
+- imagepaste
 
 ## 使用说明
 
